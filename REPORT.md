@@ -11,3 +11,11 @@ New York City has a huge selection of restaurants that represent probably all cu
 Data will be pulled from:
 * Foursquare - to discover chinese restaurants
 * NYPD crime reports
+
+## Methodology
+
+## Results
+
+## Discussion
+
+## Conclusions

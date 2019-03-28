@@ -1,3 +1,13 @@
-# Problem statement
+# Battle of neighborhoods - capstone project submission
 
-For chineese cusine lovers searching the safest nieghborhood of NYC we will combine information from Foursquare and the crime reports.
+
+
+## Introduction/Business Problem 
+
+New York City has a huge selection of restaurants that represent probably all cusines in the world. Its neighborhoods vary greatly in availability of good chineese eateries as well as safety. In order to help newcomers find the best place that combines safety and great chineese cuisine - we will explore crime and foursquare data to recommend the best combination.
+
+## Data
+
+Data will be pulled from:
+* Foursquare - to discover chinese restaurants
+* NYPD crime reports

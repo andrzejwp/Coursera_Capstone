@@ -1,0 +1,708 @@
+
+
+% A latex document created by ipypublish
+% outline: ipypublish.templates.outline_schemas/latex_outline.latex.j2
+% with segments:
+% - standard-standard_packages: with standard nbconvert packages
+% - standard-standard_definitions: with standard nbconvert definitions
+% - ipypublish-doc_article: with the main ipypublish article setup
+% - ipypublish-front_pages: with the main ipypublish title and contents page setup
+% - ipypublish-biblio_natbib: with the main ipypublish bibliography
+% - ipypublish-contents_output: with the main ipypublish content
+% - ipypublish-contents_framed_code: with the input code wrapped and framed
+% - ipypublish-glossary: with the main ipypublish glossary
+%
+%%%%%%%%%%%% DOCCLASS
+
+\documentclass[10pt,parskip=half,
+toc=sectionentrywithdots,
+bibliography=totocnumbered,
+captions=tableheading,numbers=noendperiod]{scrartcl}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% PACKAGES
+
+\usepackage[T1]{fontenc} % Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage[skip=3pt]{caption}
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage[table]{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+    \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+                        % to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+
+\usepackage{translations}
+\usepackage{microtype} % improves the spacing between words and letters
+\usepackage{placeins} % placement of figures
+% could use \usepackage[section]{placeins} but placing in subsection in command section
+% Places the float at precisely the location in the LaTeX code (with H)
+\usepackage{float}
+\usepackage[colorinlistoftodos,obeyFinal,textwidth=.8in]{todonotes} % to mark to-dos
+% number figures, tables and equations by section
+% fix for new versions of texlive (see https://tex.stackexchange.com/a/425603/107738)
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+% header/footer
+\usepackage[footsepline=0.25pt]{scrlayer-scrpage}
+
+% bibliography formatting
+\usepackage[numbers, square, super, sort&compress]{natbib}
+% hyperlink doi's
+\usepackage{doi}
+
+    % define a code float
+    \usepackage{newfloat} % to define a new float types
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Code]{codecell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{textcell}
+    \DeclareFloatingEnvironment[
+        fileext=frm,placement={!ht},
+        within=section,name=Text]{errorcell}
+
+    \usepackage{listings} % a package for wrapping code in a box
+    \usepackage[framemethod=tikz]{mdframed} % to fram code
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% DEFINITIONS
+
+% Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+
+% Math Jax compatability definitions
+\def\gt{>}
+\def\lt{<}
+
+\setcounter{secnumdepth}{5}
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+\DeclareTranslationFallback{Author}{Author}
+\DeclareTranslation{Portuges}{Author}{Autor}
+
+\DeclareTranslationFallback{List of Codes}{List of Codes}
+\DeclareTranslation{Catalan}{List of Codes}{Llista de Codis}
+\DeclareTranslation{Danish}{List of Codes}{Liste over Koder}
+\DeclareTranslation{German}{List of Codes}{Liste der Codes}
+\DeclareTranslation{Spanish}{List of Codes}{Lista de C\'{o}digos}
+\DeclareTranslation{French}{List of Codes}{Liste des Codes}
+\DeclareTranslation{Italian}{List of Codes}{Elenco dei Codici}
+\DeclareTranslation{Dutch}{List of Codes}{Lijst van Codes}
+\DeclareTranslation{Portuges}{List of Codes}{Lista de C\'{o}digos}
+
+\DeclareTranslationFallback{Supervisors}{Supervisors}
+\DeclareTranslation{Catalan}{Supervisors}{Supervisors}
+\DeclareTranslation{Danish}{Supervisors}{Vejledere}
+\DeclareTranslation{German}{Supervisors}{Vorgesetzten}
+\DeclareTranslation{Spanish}{Supervisors}{Supervisores}
+\DeclareTranslation{French}{Supervisors}{Superviseurs}
+\DeclareTranslation{Italian}{Supervisors}{Le autorit\`{a} di vigilanza}
+\DeclareTranslation{Dutch}{Supervisors}{supervisors}
+\DeclareTranslation{Portuguese}{Supervisors}{Supervisores}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breaklines=true,
+    literate={\-}{}{0\discretionary{-}{}{-}},
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\lstset{style=mystyle}
+
+\surroundwithmdframed[
+  hidealllines=true,
+  backgroundcolor=backcolour,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  innertopmargin=0pt,
+  innerbottommargin=0pt]{lstlisting}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% MARGINS
+
+ % Used to adjust the document margins
+\usepackage{geometry}
+\geometry{tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in,
+nohead,includefoot,footskip=25pt}
+% you can use showframe option to check the margins visually
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% COMMANDS
+
+% ensure new section starts on new page
+\addtokomafont{section}{\clearpage}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy
+
+% Setup hyperref package
+\hypersetup{
+    breaklinks=true,  % so long urls are correctly broken across lines
+    colorlinks=true,
+    urlcolor=urlcolor,
+    linkcolor=linkcolor,
+    citecolor=citecolor,
+    }
+
+% ensure figures are placed within subsections
+\makeatletter
+\AtBeginDocument{%
+    \expandafter\renewcommand\expandafter\subsection\expandafter
+    {\expandafter\@fb@secFB\subsection}%
+    \newcommand\@fb@secFB{\FloatBarrier
+    \gdef\@fb@afterHHook{\@fb@topbarrier \gdef\@fb@afterHHook{}}}%
+    \g@addto@macro\@afterheading{\@fb@afterHHook}%
+    \gdef\@fb@afterHHook{}%
+}
+\makeatother
+
+% number figures, tables and equations by section
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+\makeatletter
+\@addtoreset{table}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand\thetable{\thesection.\arabic{table}}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+    % set global options for float placement
+    \makeatletter
+        \providecommand*\setfloatlocations[2]{\@namedef{fps@#1}{#2}}
+    \makeatother
+
+% align captions to left (indented)
+\captionsetup{justification=raggedright,
+singlelinecheck=false,format=hang,labelfont={it,bf}}
+
+% shift footer down so space between separation line
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{scrheadings.foot.oneside}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.odd}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.even}
+\ModifyLayer[addvoffset=.6ex]{plain.scrheadings.foot.oneside}
+\pagestyle{scrheadings}
+\clearscrheadfoot{}
+\ifoot{\leftmark}
+\renewcommand{\sectionmark}[1]{\markleft{\thesection\ #1}}
+\ofoot{\pagemark}
+\cfoot{}
+
+%%%%%%%%%%%%
+
+%%%%%%%%%%%% FINAL HEADER MATERIAL
+
+% clereref must be loaded after anything that changes the referencing system
+\usepackage{cleveref}
+\creflabelformat{equation}{#2#1#3}
+
+% make the code float work with cleverref
+\crefname{codecell}{code}{codes}
+\Crefname{codecell}{code}{codes}
+% make the text float work with cleverref
+\crefname{textcell}{text}{texts}
+\Crefname{textcell}{text}{texts}
+% make the text float work with cleverref
+\crefname{errorcell}{error}{errors}
+\Crefname{errorcell}{error}{errors}
+
+%%%%%%%%%%%%
+
+\begin{document}
+
+    \title{Notebook}
+  \date{\today}
+  \maketitle
+
+    \begingroup
+    \let\cleardoublepage\relax
+    \let\clearpage\relax\tableofcontents
+    \endgroup
+
+\hypertarget{safe-eating-in-san-francisco}{%
+\section{Safe eating in San
+Francisco}\label{safe-eating-in-san-francisco}}
+
+This notebook is intended to help decide where to have dinner in San
+Francisco, safely. The data used for this are: 1.
+\href{https://developer.foursquare.com/docs/api/venues/explore}{Foursquare
+API} 2.
+\href{https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783}{SF
+Police Department Incident Reports: 2018 to Present}
+
+The final product of the notebook is an interactive map of SF, with
+districts colored by crime rate and markers showing restaurants, as well
+as sample crimes in the vicinity.
+
+\hypertarget{crime-dataset-exploration}{%
+\subsection{Crime dataset exploration}\label{crime-dataset-exploration}}
+
+The dataset published by the SFPD includes important information
+regarding the incident (e.g.~category) as well as its location. Most of
+the data in the 34 columns of this dataset (shown in table
+\ref{tbl:sfpdFull}) will be useless for the purpose of this notebook, so
+only \texttt{Police\ District}, \texttt{Latitude}, \texttt{Longitude}
+and \texttt{Incident\ Category} will be retained, as illustrated in
+table \ref{tbl:sfpdRelevantCols}.
+
+\begin{table}[H]
+\caption{Top 5 rows of the original SFPD crimes dataset}\label{tbl:sfpdFull}
+\centering
+\begin{adjustbox}{max width=\textwidth}\rowcolors{2}{gray!20}{white}
+\centering{\begin{tabular}{llllrllrrrrlllrlllllrllrrrlrrrrrrrr}
+\toprule
+{} &       Incident Datetime & Incident Date & Incident Time &  Incident Year & Incident Day of Week &         Report Datetime &       Row ID &  Incident ID &  Incident Number &   CAD Number & Report Type Code & Report Type Description & Filed Online &  Incident Code &    Incident Category &    Incident Subcategory &               Incident Description &            Resolution &                 Intersection &         CNN & Police District &           Analysis Neighborhood &  Supervisor District &   Latitude &   Longitude &                                 point &  SF Find Neighborhoods &  Current Police Districts &  Current Supervisor Districts &  Analysis Neighborhoods &  HSOC Zones as of 2018-06-05 &  OWED Public Spaces &  Central Market/Tenderloin Boundary Polygon - Updated &  Parks Alliance CPSI (27+TL sites) \\
+\midrule
+0 &  2018/12/02 12:45:00 AM &    2018/12/02 &         00:45 &           2018 &               Sunday &  2018/12/02 01:56:00 AM &  74374327130 &       743743 &        180908554 &  183360210.0 &               II &                 Initial &          NaN &          27130 &  Other Miscellaneous &                   Other &      Burglary Tools, Possession Of &  Cite or Arrest Adult &          04TH ST \textbackslash  JESSIE ST &  24635000.0 &        Southern &  Financial District/South Beach &                  6.0 &  37.784908 & -122.404795 &    (37.78490829943, -122.40479506276) &                   32.0 &                       5.0 &                          10.0 &                     8.0 &                          NaN &                 NaN &                                                NaN &                                NaN \\
+1 &  2018/12/01 08:30:00 PM &    2018/12/01 &         20:30 &           2018 &             Saturday &  2018/12/01 09:18:00 PM &  74370071000 &       743700 &        180908112 &  183353564.0 &               II &                 Initial &          NaN &          71000 &        Lost Property &           Lost Property &                      Lost Property &        Open or Active &      POWELL ST \textbackslash  OFARRELL ST &  24904000.0 &         Central &                      Tenderloin &                  3.0 &  37.786410 & -122.408036 &  (37.786409612811, -122.408036237445) &                   19.0 &                       6.0 &                           3.0 &                    36.0 &                          NaN &                 NaN &                                                1.0 &                                NaN \\
+2 &  2019/03/18 02:01:00 PM &    2019/03/18 &         14:01 &           2019 &               Monday &  2019/03/18 02:21:00 PM &  78164004134 &       781640 &        190194129 &  190772267.0 &               II &                 Initial &          NaN &           4134 &              Assault &          Simple Assault &                            Battery &  Cite or Arrest Adult &        22ND ST \textbackslash  POTRERO AVE &  23967000.0 &         Mission &                         Mission &                  9.0 &  37.756834 & -122.406699 &  (37.756833733806, -122.406699002688) &                   53.0 &                       3.0 &                           2.0 &                    20.0 &                          3.0 &                 NaN &                                                NaN &                                NaN \\
+3 &  2019/03/20 08:00:00 AM &    2019/03/20 &         08:00 &           2019 &            Wednesday &  2019/03/20 02:06:00 PM &  78169706244 &       781697 &        190199583 &  190792201.0 &               II &                 Initial &          NaN &           6244 &        Larceny Theft &  Larceny - From Vehicle &  Theft, From Locked Vehicle, >\$950 &        Open or Active &  JESSIE EAST ST \textbackslash  MISSION ST &  35047000.0 &        Southern &                 South of Market &                  6.0 &  37.784007 & -122.404865 &   (37.78400661242, -122.404864795177) &                   32.0 &                       1.0 &                          10.0 &                    34.0 &                          NaN &                 NaN &                                                NaN &                                NaN \\
+4 &  2019/03/12 01:30:00 PM &    2019/03/12 &         13:30 &           2019 &              Tuesday &  2019/03/15 06:02:00 PM &  78154706372 &       781547 &        196055103 &          NaN &               II &        Coplogic Initial &         True &           6372 &        Larceny Theft &   Larceny Theft - Other &    Theft, Other Property, \$50-\$200 &        Open or Active &                          NaN &         NaN &         Central &                             NaN &                  NaN &        NaN &         NaN &                                   NaN &                    NaN &                       NaN &                           NaN &                     NaN &                          NaN &                 NaN &                                                NaN &                                NaN \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[H]
+\caption{Top 5 rows, only relevant columns}\label{tbl:sfpdRelevantCols}
+\centering
+\begin{adjustbox}{max width=\textwidth}\rowcolors{2}{gray!20}{white}
+\centering{\begin{tabular}{llrrl}
+\toprule
+{} & Police District &   Latitude &   Longitude &    Incident Category \\
+\midrule
+0 &        Southern &  37.784908 & -122.404795 &  Other Miscellaneous \\
+1 &         Central &  37.786410 & -122.408036 &        Lost Property \\
+2 &         Mission &  37.756834 & -122.406699 &              Assault \\
+3 &        Southern &  37.784007 & -122.404865 &        Larceny Theft \\
+4 &         Central &        NaN &         NaN &        Larceny Theft \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+Some of the incidents reported are not relevant or to vague to include
+in the analysis, so they will be dropped. Incidents from categories
+\texttt{Gambling}, \texttt{Liquor\ Laws}, \texttt{Vehicle\ Impounded},
+\texttt{Vehicle\ Misplaced}, \texttt{Case\ Closure}, \texttt{Other},
+\texttt{Miscellaneous\ Investigation}, \texttt{Recovered\ Vehicle},
+\texttt{Non-Criminal}, \texttt{Other\ Miscellaneous} amount to 36124 and
+after filtering the dataset is left with 158729 incidents. Table
+\ref{tbl:sfpdIncidentByCategory} shows number of incidents per category,
+also visualized in figure \ref{fig:barCrimePerCategory}. Figure
+\ref{fig:barCrimePerDistrict} shows the incident numbers per district
+and figure \ref{fig:barCrimePerCategoryDistrict} as well as table
+\ref{tbl:barCrimePerCategoryDistrict} show that information combined.
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+                             Incident Category  Count
+0       Human Trafficking, Commercial Sex Acts      5
+1                              Weapons Offence      6
+2                                     Homicide     30
+3                                   Suspicious     32
+4                         Motor Vehicle Theft?     37
+5                                         Rape     56
+6                               Drug Violation     61
+7                                      Suicide     81
+8   Human Trafficking (A), Commercial Sex Acts     85
+9                              Courtesy Report    131
+10                                 Fire Report    189
+11                                   Vandalism    235
+12                                Embezzlement    236
+13                              Family Offense    255
+14                           Juvenile Offenses    263
+15                           Traffic Collision    354
+16                                 Sex Offense    402
+17                                       Arson    453
+18                                Prostitution    569
+19                             Civil Sidewalks    640
+20                  Forgery And Counterfeiting    882
+21                             Stolen Property   1037
+22                             Weapons Offense   1047
+23                        Weapons Carrying Etc   1082
+24                              Other Offenses   1360
+25                    Traffic Violation Arrest   2721
+26                          Disorderly Conduct   3430
+27                              Suspicious Occ   3578
+28    Offences Against The Family And Children   3886
+29                              Missing Person   4648
+30                                     Robbery   4718
+31                                Drug Offense   5361
+32                                       Fraud   5628
+33                               Lost Property   6590
+34                         Motor Vehicle Theft   6820
+35                                     Warrant   7423
+36                                    Burglary   9077
+37                          Malicious Mischief  11589
+38                                     Assault  11813
+39                               Larceny Theft  61902
+
+\end{lstlisting}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.25\paperheight}{capstone_project_files/output_10_0.png}\end{center}\caption{Number of crimes per district}\label{fig:barCrimePerDistrict}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.25\paperheight}{capstone_project_files/output_11_0.png}\end{center}\caption{Crime per category}\label{fig:barCrimePerCategory}\end{figure}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+  Incident Category Police District  count
+0     Larceny Theft         Central  14091
+1     Larceny Theft        Northern  11128
+2     Larceny Theft        Southern   8234
+3     Larceny Theft         Mission   7334
+4     Larceny Theft        Richmond   4533
+5     Larceny Theft         Taraval   3866
+6     Larceny Theft      Tenderloin   3734
+7     Larceny Theft         Bayview   3487
+8     Larceny Theft       Ingleside   2792
+9     Larceny Theft            Park   2703
+\end{lstlisting}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight},height=0.25\paperheight}{capstone_project_files/output_13_0.png}\end{center}\caption{Number of crimes per category and district}\label{fig:barCrimePerCategoryDistrict}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_14_0.png}\end{center}\end{figure}
+
+\hypertarget{crime-dataset-summary}{%
+\subsection{Crime dataset summary}\label{crime-dataset-summary}}
+
+Most important information regarding crime rate per category and
+district is shown in table \ref{tbl:pivotCrimeByDistrictCategory}.
+
+\begin{table}[H]
+\caption{Incident count grouped by category and district.}\label{tbl:pivotCrimeByDistrictCategory}
+\centering
+\begin{adjustbox}{max width=\textwidth}\rowcolors{2}{gray!20}{white}
+\centering{\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Police District &  Bayview &  Central &  Ingleside &  Mission &  Northern &    Park &  Richmond &  Southern &  Taraval &  Tenderloin \\
+Incident Category                          &          &          &            &          &           &         &           &           &          &             \\
+\midrule
+Arson                                      &     73.0 &     65.0 &       44.0 &     60.0 &      37.0 &    12.0 &      24.0 &      60.0 &     22.0 &        56.0 \\
+Assault                                    &   1311.0 &   1363.0 &      944.0 &   2054.0 &    1253.0 &   430.0 &     363.0 &    1586.0 &    694.0 &      1815.0 \\
+Burglary                                   &    833.0 &   1590.0 &      857.0 &    910.0 &    1358.0 &   491.0 &     449.0 &    1407.0 &    753.0 &       429.0 \\
+Civil Sidewalks                            &      NaN &     15.0 &        NaN &    168.0 &       3.0 &   437.0 &       8.0 &       6.0 &      NaN &         3.0 \\
+Courtesy Report                            &     17.0 &     20.0 &       11.0 &     16.0 &       9.0 &     6.0 &      12.0 &      15.0 &     12.0 &        13.0 \\
+Disorderly Conduct                         &    375.0 &    420.0 &      337.0 &    608.0 &     378.0 &   115.0 &     161.0 &     422.0 &    291.0 &       323.0 \\
+Drug Offense                               &    188.0 &    375.0 &      216.0 &    791.0 &     347.0 &   181.0 &      85.0 &     664.0 &    112.0 &      2402.0 \\
+Drug Violation                             &      8.0 &      3.0 &        9.0 &      8.0 &       2.0 &     1.0 &       NaN &       8.0 &      NaN &        22.0 \\
+Embezzlement                               &     28.0 &     37.0 &       10.0 &     28.0 &      19.0 &     7.0 &      15.0 &      41.0 &     16.0 &        35.0 \\
+Family Offense                             &     67.0 &     13.0 &       27.0 &     40.0 &      19.0 &     6.0 &      20.0 &      18.0 &     29.0 &        16.0 \\
+Fire Report                                &     38.0 &     19.0 &       26.0 &     27.0 &      11.0 &     8.0 &       9.0 &      24.0 &     16.0 &        11.0 \\
+Forgery And Counterfeiting                 &     57.0 &    156.0 &       69.0 &    143.0 &     113.0 &    34.0 &      49.0 &     136.0 &     58.0 &        67.0 \\
+Fraud                                      &    360.0 &    973.0 &      464.0 &    601.0 &     760.0 &   262.0 &     396.0 &     693.0 &    750.0 &       369.0 \\
+Homicide                                   &      6.0 &      3.0 &        1.0 &      6.0 &       2.0 &     NaN &       1.0 &       3.0 &      4.0 &         4.0 \\
+Human Trafficking (A), Commercial Sex Acts &      1.0 &     13.0 &        1.0 &     10.0 &       3.0 &     NaN &       NaN &      34.0 &     20.0 &         3.0 \\
+Human Trafficking, Commercial Sex Acts     &      NaN &      NaN &        1.0 &      1.0 &       NaN &     NaN &       NaN &       3.0 &      NaN &         NaN \\
+Juvenile Offenses                          &     12.0 &      1.0 &       17.0 &     10.0 &      11.0 &    26.0 &      15.0 &       7.0 &    158.0 &         6.0 \\
+Larceny Theft                              &   3487.0 &  14091.0 &     2792.0 &   7334.0 &   11128.0 &  2703.0 &    4533.0 &    8234.0 &   3866.0 &      3734.0 \\
+Lost Property                              &    285.0 &   1461.0 &      314.0 &    939.0 &     793.0 &   235.0 &     373.0 &    1032.0 &    464.0 &       694.0 \\
+Malicious Mischief                         &   1275.0 &   1915.0 &      983.0 &   1540.0 &    1512.0 &   565.0 &     682.0 &    1570.0 &    828.0 &       719.0 \\
+Missing Person                             &    392.0 &    327.0 &      420.0 &    580.0 &     436.0 &   642.0 &     223.0 &     582.0 &    661.0 &       385.0 \\
+Motor Vehicle Theft                        &   1118.0 &    658.0 &      833.0 &    956.0 &     741.0 &   388.0 &     403.0 &     828.0 &    632.0 &       263.0 \\
+Motor Vehicle Theft?                       &      4.0 &      5.0 &        7.0 &      7.0 &       3.0 &     1.0 &       1.0 &       3.0 &      4.0 &         2.0 \\
+Offences Against The Family And Children   &    466.0 &    364.0 &      472.0 &    539.0 &     456.0 &   141.0 &     200.0 &     412.0 &    380.0 &       456.0 \\
+Other Offenses                             &     97.0 &    140.0 &      100.0 &    201.0 &     104.0 &   154.0 &      76.0 &     178.0 &     65.0 &       245.0 \\
+Prostitution                               &      NaN &    117.0 &        2.0 &    284.0 &       8.0 &     NaN &       NaN &      65.0 &     46.0 &        47.0 \\
+Rape                                       &      4.0 &      2.0 &        3.0 &     12.0 &       6.0 &     2.0 &       2.0 &      16.0 &      3.0 &         6.0 \\
+Robbery                                    &    523.0 &    801.0 &      496.0 &    685.0 &     548.0 &   104.0 &     143.0 &     486.0 &    213.0 &       719.0 \\
+Sex Offense                                &     25.0 &     38.0 &       29.0 &     64.0 &      55.0 &    17.0 &       9.0 &      91.0 &     28.0 &        46.0 \\
+Stolen Property                            &     97.0 &    207.0 &       75.0 &    141.0 &     150.0 &    28.0 &      49.0 &     125.0 &     52.0 &       113.0 \\
+Suicide                                    &      5.0 &      9.0 &        7.0 &      8.0 &      13.0 &     4.0 &      10.0 &      12.0 &      8.0 &         5.0 \\
+Suspicious                                 &      1.0 &      4.0 &        NaN &      1.0 &       1.0 &     1.0 &       5.0 &      18.0 &      1.0 &         NaN \\
+Suspicious Occ                             &    413.0 &    501.0 &      315.0 &    450.0 &     275.0 &   146.0 &     292.0 &     529.0 &    249.0 &       408.0 \\
+Traffic Collision                          &     55.0 &     39.0 &       46.0 &     53.0 &      41.0 &    16.0 &      29.0 &      31.0 &     26.0 &        18.0 \\
+Traffic Violation Arrest                   &    160.0 &    258.0 &      342.0 &    693.0 &     186.0 &   115.0 &     162.0 &     317.0 &    181.0 &       307.0 \\
+Vandalism                                  &     19.0 &     27.0 &       17.0 &     42.0 &      36.0 &    17.0 &      14.0 &      29.0 &     23.0 &        11.0 \\
+Warrant                                    &    553.0 &    890.0 &      411.0 &   1462.0 &     651.0 &   349.0 &     184.0 &     943.0 &    251.0 &      1729.0 \\
+Weapons Carrying Etc                       &    178.0 &    113.0 &      139.0 &    199.0 &      83.0 &    12.0 &      26.0 &      93.0 &     58.0 &       181.0 \\
+Weapons Offence                            &      NaN &      2.0 &        NaN &      2.0 &       NaN &     NaN &       NaN &       NaN &      1.0 &         1.0 \\
+Weapons Offense                            &    172.0 &     96.0 &      119.0 &    203.0 &      80.0 &    35.0 &      41.0 &     134.0 &     54.0 &       113.0 \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+\hypertarget{venues-dataset-exploration}{%
+\section{Venues dataset exploration}\label{venues-dataset-exploration}}
+
+For each of the districts in the SFPD dataset a single incident was
+randomly selected in order to get its latitude and longitude, which the
+serve to query the Foursquare API. Again the full dataset consist 31
+columns, of which only several
+(\texttt{{[}\textquotesingle{}venue.location.lat\textquotesingle{},\textquotesingle{}venue.location.lng\textquotesingle{},\textquotesingle{}venue.name\textquotesingle{}{]}})
+will be useful for the purpose of this analysis, other columns will be
+dropped, as well as locations with NaN coordinates. At the time of
+writing of this report - the venue dataset consisted of 884 restaurants.
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\centering{\begin{tabular}{llrrl}
+\toprule
+{} & Police District &  venue.location.lat &  venue.location.lng &                      venue.name \\
+\midrule
+0 &         Bayview &           37.730525 &         -122.372998 &                Archimedes Banya \\
+1 &         Bayview &           37.726812 &         -122.382880 &  The San Francisco Mead Company \\
+2 &         Bayview &           37.738468 &         -122.380874 &         Speakeasy Ales \& Lagers \\
+3 &         Bayview &           37.734826 &         -122.390764 &          Radio Africa \& Kitchen \\
+4 &         Bayview &           37.736240 &         -122.390361 &                            TATO \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\centering{\begin{tabular}{llrrl}
+\toprule
+{} & Police District &  venue.location.lat &  venue.location.lng &                       venue.name \\
+\midrule
+95 &      Tenderloin &           37.782672 &         -122.410272 &              Brannan Food Trucks \\
+96 &      Tenderloin &           37.782005 &         -122.404512 &   InterContinental San Francisco \\
+97 &      Tenderloin &           37.787279 &         -122.400036 &                         The Bird \\
+98 &      Tenderloin &           37.783437 &         -122.400884 &  Yerba Buena Gardens Play Circle \\
+99 &      Tenderloin &           37.782651 &         -122.410302 &             The Warfield Theatre \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+884
+\end{lstlisting}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_23_0.png}\end{center}\end{figure}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+<folium.folium.Map at 0x7f50896eee10>
+\end{lstlisting}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+GeoJSON file downloaded!
+
+\end{lstlisting}
+
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
+<folium.folium.Map at 0x7f5261558390>
+\end{lstlisting}
+
+\end{document}

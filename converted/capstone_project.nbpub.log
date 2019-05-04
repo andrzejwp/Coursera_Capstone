@@ -1,0 +1,64 @@
+INFO:ipypublish:started ipypublish v0.10.1 at Sat May  4 09:20:09 2019
+INFO:ipypublish:logging to: /home/jovyan/coursera_capstone/converted/capstone_project.nbpub.log
+INFO:ipypublish:running for ipynb(s) at: capstone_project.ipynb
+INFO:ipypublish:with conversion configuration: latex_ipypublish_nocode
+INFO:nbmerge:Reading notebook
+INFO:ipypublish:finding conversion configuration: latex_ipypublish_nocode
+INFO:ipypublish:loading conversion configuration
+INFO:ipypublish:creating exporter
+INFO:ipypublish:creating template and loading filters
+INFO:ipypublish:creating process configuration
+INFO:ipypublish:running nbconvert
+INFO:root:adding ipub defaults to notebook
+INFO:root:splitting outputs into separate cells
+INFO:resolve_links:resolving external file paths in ipub metadata to: capstone_project.ipynb
+INFO:captions:extracting caption cells
+INFO:write-text-file:writing stream to file: /home/jovyan/coursera_capstone/converted/capstone_project.tex
+INFO:write-resource-files:writing files in resources[outputs] to: /home/jovyan/coursera_capstone/converted
+INFO:copy-resource-paths:copying files in resources[external_file_paths] to: /home/jovyan/coursera_capstone/converted/capstone_project_files
+INFO:pdf-export:running pdf conversion
+INFO:pdf-export:running: latexmk -xelatex -bibtex -pdf --interaction=batchmode /home/jovyan/coursera_capstone/converted/capstone_project.tex
+INFO:pdf-export:latexmk: Latexmk: This is Latexmk, John Collins, 1 January 2015, version: 4.41.
+INFO:pdf-export:latexmk: Rule 'pdflatex': File changes, etc:
+INFO:pdf-export:latexmk: Changed files, or newly in use since previous run(s):
+INFO:pdf-export:latexmk: '/home/jovyan/coursera_capstone/converted/capstone_project.tex'
+INFO:pdf-export:latexmk: 'capstone_project.tex'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Run number 1 of rule 'pdflatex'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Running 'xelatex  --interaction=batchmode -recorder  "/home/jovyan/coursera_capstone/converted/capstone_project.tex"'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Latexmk: applying rule 'pdflatex'...
+INFO:pdf-export:latexmk: This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex)
+INFO:pdf-export:latexmk: restricted \write18 enabled.
+INFO:pdf-export:latexmk: entering extended mode
+INFO:pdf-export:latexmk: Latexmk: References changed.
+INFO:pdf-export:latexmk: Latexmk: Log file says output to 'capstone_project.pdf'
+INFO:pdf-export:latexmk: Latexmk: List of undefined refs and citations:
+INFO:pdf-export:latexmk: Reference `tbl:barCrimePerCategoryDistrict' on page 2 undefined on input line 511
+INFO:pdf-export:latexmk: Reference `tbl:sfpdIncidentByCategory' on page 2 undefined on input line 507
+INFO:pdf-export:latexmk: Latexmk: Summary of warnings:
+INFO:pdf-export:latexmk: Latex failed to resolve 2 reference(s)
+INFO:pdf-export:latexmk: Rule 'pdflatex': File changes, etc:
+INFO:pdf-export:latexmk: Changed files, or newly in use since previous run(s):
+INFO:pdf-export:latexmk: 'capstone_project.aux'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Run number 2 of rule 'pdflatex'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Running 'xelatex  --interaction=batchmode -recorder  "/home/jovyan/coursera_capstone/converted/capstone_project.tex"'
+INFO:pdf-export:latexmk: ------------
+INFO:pdf-export:latexmk: Latexmk: applying rule 'pdflatex'...
+INFO:pdf-export:latexmk: This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex)
+INFO:pdf-export:latexmk: restricted \write18 enabled.
+INFO:pdf-export:latexmk: entering extended mode
+INFO:pdf-export:latexmk: Latexmk: Log file says output to 'capstone_project.pdf'
+INFO:pdf-export:latexmk: Latexmk: List of undefined refs and citations:
+INFO:pdf-export:latexmk: Reference `tbl:barCrimePerCategoryDistrict' on page 2 undefined on input line 511
+INFO:pdf-export:latexmk: Reference `tbl:sfpdIncidentByCategory' on page 2 undefined on input line 507
+INFO:pdf-export:latexmk: Latexmk: Summary of warnings:
+INFO:pdf-export:latexmk: Latex failed to resolve 2 reference(s)
+INFO:pdf-export:latexmk: Latexmk: All targets (capstone_project.pdf) are up-to-date
+INFO:pdf-export:pdf conversion complete
+INFO:ipypublish:process finished successfully

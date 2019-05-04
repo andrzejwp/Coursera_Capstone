@@ -433,9 +433,8 @@ singlelinecheck=false,format=hang,labelfont={it,bf}}
     \let\clearpage\relax\tableofcontents
     \endgroup
 
-\hypertarget{safe-eating-in-san-francisco}{%
-\section{Safe eating in San
-Francisco}\label{safe-eating-in-san-francisco}}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
 This notebook is intended to help decide where to have dinner in San
 Francisco, safely. The data used for this are: 1.
@@ -650,50 +649,38 @@ will be useful for the purpose of this analysis, other columns will be
 dropped, as well as locations with NaN coordinates. At the time of
 writing of this report - the venue dataset consisted of 884 restaurants.
 
-\begin{table}[H]
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\centering{\begin{tabular}{llrrl}
-\toprule
-{} & Police District &  venue.location.lat &  venue.location.lng &                      venue.name \\
-\midrule
-0 &         Bayview &           37.730525 &         -122.372998 &                Archimedes Banya \\
-1 &         Bayview &           37.726812 &         -122.382880 &  The San Francisco Mead Company \\
-2 &         Bayview &           37.738468 &         -122.380874 &         Speakeasy Ales \& Lagers \\
-3 &         Bayview &           37.734826 &         -122.390764 &          Radio Africa \& Kitchen \\
-4 &         Bayview &           37.736240 &         -122.390361 &                            TATO \\
-\bottomrule
-\end{tabular}
-}
-\end{adjustbox}
-\end{table}
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+777
 
-\begin{table}[H]
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\centering{\begin{tabular}{llrrl}
-\toprule
-{} & Police District &  venue.location.lat &  venue.location.lng &                       venue.name \\
-\midrule
-95 &      Tenderloin &           37.782672 &         -122.410272 &              Brannan Food Trucks \\
-96 &      Tenderloin &           37.782005 &         -122.404512 &   InterContinental San Francisco \\
-97 &      Tenderloin &           37.787279 &         -122.400036 &                         The Bird \\
-98 &      Tenderloin &           37.783437 &         -122.400884 &  Yerba Buena Gardens Play Circle \\
-99 &      Tenderloin &           37.782651 &         -122.410302 &             The Warfield Theatre \\
-\bottomrule
-\end{tabular}
-}
-\end{adjustbox}
-\end{table}
-
-\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-884
 \end{lstlisting}
 
-\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_23_0.png}\end{center}\end{figure}
+\begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
+478
+
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\centering{\begin{tabular}{llrrllr}
+\toprule
+{} & Police District &  venue.location.lat &  venue.location.lng &                venue.name &                  venue.id &  rating \\
+\midrule
+0 &         Bayview &           37.734826 &         -122.390764 &    Radio Africa \& Kitchen &  4f56b36a6b7406c0ea010e9b &     8.4 \\
+1 &         Bayview &           37.736240 &         -122.390361 &                      TATO &  5b89f7f6a0215b002c7cfd73 &     8.4 \\
+2 &         Bayview &           37.726908 &         -122.391536 &  Craftsman and Wolves Den &  5703cab0498e52dae7c36bcf &     8.2 \\
+3 &         Bayview &           37.732747 &         -122.392245 &       Fox and Lion Bakery &  5618351f498e69559d3990b7 &     7.8 \\
+4 &         Bayview &           37.734287 &         -122.390462 &            Old Skool Cafe &  4d0401f454d0236aa38cecd5 &     7.4 \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_24_0.png}\end{center}\end{figure}
 
 \begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-<folium.folium.Map at 0x7f50896eee10>
+<folium.folium.Map at 0x7f507cf55c50>
 \end{lstlisting}
 
 \begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,belowskip=5pt,aboveskip=5pt,breakindent=0pt]
@@ -702,7 +689,70 @@ GeoJSON file downloaded!
 \end{lstlisting}
 
 \begin{lstlisting}[language={},postbreak={},numbers=none,xrightmargin=7pt,breakindent=0pt,aboveskip=5pt,belowskip=5pt]
-<folium.folium.Map at 0x7f5261558390>
+<folium.folium.Map at 0x7f507f8a8d68>
 \end{lstlisting}
+
+\hypertarget{explore-highest-rated-restaurants-by-district}{%
+\subsection{Explore highest rated restaurants by
+district}\label{explore-highest-rated-restaurants-by-district}}
+
+As the first step to choose the best place to dine we will look into how
+ratings per district are distributed.
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_0.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_1.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_2.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_3.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_4.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_5.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_6.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_7.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_8.png}\end{center}\end{figure}
+
+\begin{figure}[H]\begin{center}\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{capstone_project_files/output_30_9.png}\end{center}\end{figure}
+
+\begin{table}[H]
+\caption{Venues count by district and rating count}\label{tbl:pivotRatingByDistrict}
+\centering
+\begin{adjustbox}{max width=\textwidth}\rowcolors{2}{gray!20}{white}
+\centering{\begin{tabular}{lrrrrrrr}
+\toprule
+Police District &  Bayview &  Central &  Ingleside &  Mission &  Northern &  Park &  Richmond \\
+rating  &          &          &            &          &           &       &           \\
+\midrule
+(5, 6]  &        1 &        0 &          4 &        0 &         0 &     0 &         0 \\
+(6, 7]  &        2 &        0 &         13 &        0 &         0 &     0 &        12 \\
+(7, 8]  &        3 &       24 &         14 &       24 &        28 &    31 &        12 \\
+(8, 9]  &        3 &       73 &          6 &       61 &        63 &    58 &         8 \\
+(9, 10] &        0 &        3 &          0 &       15 &         9 &    11 &         0 \\
+\bottomrule
+\end{tabular}
+}
+\end{adjustbox}
+\end{table}
+
+Based on table \ref{tbl:pivotRatingByDistrict} - the districts that have
+the highest rated venues are Central and Mission, however these are also
+heavily influenced by crime, as shown in figure
+\ref{fig:barCrimePerDistrict}. We need to select the neighborhood with
+best food and relatively low crime. Northern district is 2nd in terms of
+number of highly rated venues and 3rd in crime rate, however Park
+district has lowest crime yet pretty decent food, as well.
+
+\hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+Based on analysis of the crime data and venue information provided via
+Foursquare API we were able to determine that the Park district is the
+safest (disregarding the kind of incidents, only looking at the volume)
+while having relatively decent restaurants.
 
 \end{document}

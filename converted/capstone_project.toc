@@ -1,4 +1,6 @@
-\contentsline {section}{\numberline {1}Safe eating in San Francisco}{2}{section.1}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}Crime dataset exploration}{2}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Crime dataset summary}{5}{subsection.1.2}
 \contentsline {section}{\numberline {2}Venues dataset exploration}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Explore highest rated restaurants by district}{7}{subsection.2.1}
+\contentsline {section}{\numberline {3}Conclusions}{14}{section.3}

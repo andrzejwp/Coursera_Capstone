@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.4.25)  4 MAY 2019 09:20
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.4.25)  4 MAY 2019 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1451,7 +1451,7 @@ Package scrlayer-scrpage Warning: \headheight to low.
 (scrlayer-scrpage)                e.g., setting geometry's option
 (scrlayer-scrpage)                `head=12.0pt'.
 (scrlayer-scrpage)                I'll also decrease \topmargin on input line 4
-38.
+37.
 
 
 Overfull \vbox (12.0pt too high) has occurred while \output is active []
@@ -1463,7 +1463,7 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
 
 ]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 458.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 457.
 
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1473,20 +1473,20 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/ppl/bx/it' in size <10> not available
-(Font)              Font shape `T1/ppl/b/it' tried instead on input line 463.
+(Font)              Font shape `T1/ppl/b/it' tried instead on input line 462.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 507.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 506.
 
 LaTeX Warning: Reference `tbl:sfpdIncidentByCategory' on page 2 undefined on in
-put line 507.
+put line 506.
 
 
 LaTeX Warning: Reference `tbl:barCrimePerCategoryDistrict' on page 2 undefined 
-on input line 511.
+on input line 510.
 
 Package mdframed Info: You first box width is to small
  mdframed fixed it
-(mdframed)              on input line 556.
+(mdframed)              on input line 555.
 [2
 
 ]
@@ -1500,7 +1500,7 @@ File: capstone_project_files/output_13_0.png Graphic file (type bmp)
 File: capstone_project_files/output_14_0.png Graphic file (type bmp)
 <capstone_project_files/output_14_0.png>
 [4] [5] [6]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 648
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 647
 .
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1512,28 +1512,55 @@ Package microtype Info: Loading generic protrusion settings for font family
 Package microtype Info: Character `texttrademark ' is missing
 (microtype)             in font `TS1/lmtt/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-File: capstone_project_files/output_23_0.png Graphic file (type bmp)
-<capstone_project_files/output_23_0.png>
+File: capstone_project_files/output_24_0.png Graphic file (type bmp)
+<capstone_project_files/output_24_0.png>
+File: capstone_project_files/output_30_0.png Graphic file (type bmp)
+<capstone_project_files/output_30_0.png>
 [7
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 708.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 708.
+File: capstone_project_files/output_30_1.png Graphic file (type bmp)
+<capstone_project_files/output_30_1.png>
+File: capstone_project_files/output_30_2.png Graphic file (type bmp)
+<capstone_project_files/output_30_2.png>
+[8]
+File: capstone_project_files/output_30_3.png Graphic file (type bmp)
+<capstone_project_files/output_30_3.png>
+File: capstone_project_files/output_30_4.png Graphic file (type bmp)
+<capstone_project_files/output_30_4.png>
+[9]
+File: capstone_project_files/output_30_5.png Graphic file (type bmp)
+<capstone_project_files/output_30_5.png>
+File: capstone_project_files/output_30_6.png Graphic file (type bmp)
+<capstone_project_files/output_30_6.png>
+[10]
+File: capstone_project_files/output_30_7.png Graphic file (type bmp)
+<capstone_project_files/output_30_7.png>
+File: capstone_project_files/output_30_8.png Graphic file (type bmp)
+<capstone_project_files/output_30_8.png>
+[11]
+File: capstone_project_files/output_30_9.png Graphic file (type bmp)
+<capstone_project_files/output_30_9.png>
+[12] [13] [14
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 758.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 758.
 (./capstone_project.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 708.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 708.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 758.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 758.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 708.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 758.
  ) 
 Here is how much of TeX's memory you used:
- 42352 strings out of 494988
- 826452 string characters out of 6178638
+ 42401 strings out of 494988
+ 828081 string characters out of 6178638
  1761843 words of memory out of 5000000
- 45626 multiletter control sequences out of 15000+600000
+ 45665 multiletter control sequences out of 15000+600000
  565178 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  73i,19n,83p,10446b,1259s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on capstone_project.pdf (7 pages).
+Output written on capstone_project.pdf (14 pages).
